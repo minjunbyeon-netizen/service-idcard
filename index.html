@@ -427,6 +427,10 @@
   var PARTICLE_COUNT = 1800, SPHERE_RADIUS = 0.44, BASE_DOT_SIZE = 1.6, TAIL_FACTOR = 0.55;
   var ROTATION_SPEED_X = 0.00025, ROTATION_SPEED_Y = 0.00040, MOUSE_INFLUENCE = 0.00018;
   var COLOR_BASE = [150, 235, 210];
+  // 색 사이클: 민트 → 흰색(밝게) → 짙은 남색(은은히 사라짐) → 민트. screen 블렌드라 어두울수록 페이드됨
+  var COLOR_STOPS = [[150, 235, 210], [255, 255, 255], [34, 40, 54]];
+  var COLOR_PERIOD = 17; // 한 바퀴 도는 데 걸리는 초 (천천히)
+  var REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var rotX = 0.18, rotY = 0.0, mouseX = 0, mouseY = 0, targetRotX = 0, targetRotY = 0;
   var particles = [], dpr = 1, morphStartTs = null;
 
@@ -476,6 +480,17 @@
     var blend = phaseInPeriod < (PERIOD - BLEND) ? 0 : (phaseInPeriod - (PERIOD - BLEND)) / BLEND;
     blend = blend * blend * (3 - 2 * blend);
     ctx.clearRect(0, 0, W, H);
+    // 시간에 따라 색을 천천히 순환 (민트 → 흰색 → 어두움 → 민트)
+    var cr = COLOR_BASE[0], cg = COLOR_BASE[1], cb = COLOR_BASE[2];
+    if (!REDUCE_MOTION) {
+      var n = COLOR_STOPS.length;
+      var fpos = ((mt / COLOR_PERIOD) % 1 + 1) % 1 * n;
+      var ci = Math.floor(fpos) % n, cn = (ci + 1) % n, cf = fpos - Math.floor(fpos);
+      cf = cf * cf * (3 - 2 * cf);
+      cr = Math.round(COLOR_STOPS[ci][0] * (1 - cf) + COLOR_STOPS[cn][0] * cf);
+      cg = Math.round(COLOR_STOPS[ci][1] * (1 - cf) + COLOR_STOPS[cn][1] * cf);
+      cb = Math.round(COLOR_STOPS[ci][2] * (1 - cf) + COLOR_STOPS[cn][2] * cf);
+    }
     var R = Math.min(W, H) * SPHERE_RADIUS;
     var projected = particles.map(function (p) {
       var sx0 = p.ox, sy0 = p.oy, sz0 = p.oz;
@@ -495,7 +510,7 @@
       if (pt.alpha < 0.015) continue;
       ctx.beginPath();
       ctx.arc(pt.px, pt.py, Math.max(0.35, pt.size), 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + COLOR_BASE[0] + ',' + COLOR_BASE[1] + ',' + COLOR_BASE[2] + ',' + pt.alpha.toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + pt.alpha.toFixed(3) + ')';
       ctx.fill();
     }
   }
@@ -503,7 +518,7 @@
   function init() {
     buildParticles(); resize();
     window.addEventListener('resize', function () { resize(); }, { passive: true });
-    render();
+    requestAnimationFrame(render);
     var startTs = null, FADE_DURATION = 1400, TARGET = 0.32;
     function fadeIn(ts) {
       if (!startTs) startTs = ts;
