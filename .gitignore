@@ -5,3 +5,7 @@ __pycache__/
 verify_*.png
 m_*.png
 mm_*.png
+prev_*.png
+_preview*.html
+_og.html
+*_modal.png
