@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT 명함 — 브랜드 버전 6종</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@300;400;500;700&family=Jua&display=swap" rel="stylesheet">
+<style>
+  @font-face{
+    font-family:'BMHANNA';
+    src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/BMHANNAPro.woff') format('woff');
+    font-weight:normal;font-display:swap;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Pretendard",-apple-system,sans-serif;
+    font-weight:300;
+    background:#eceef1;color:#16181d;
+    padding:48px 24px 80px;-webkit-font-smoothing:antialiased;
+  }
+  .head{max-width:1040px;margin:0 auto 40px;}
+  .head h1{font-size:26px;font-weight:700;}
+  .head p{color:#6b7280;font-size:13px;margin-top:8px;}
+
+  .grid{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:40px 32px;}
+  @media(max-width:1040px){.grid{grid-template-columns:1fr;}}
+  .item{display:flex;flex-direction:column;gap:12px;}
+  .item .tag{font-size:13px;font-weight:700;color:#6b7280;}
+
+  /* 명함 90x50mm */
+  .card{
+    width:100%;aspect-ratio:486/270;
+    border-radius:12px;overflow:hidden;position:relative;
+    box-shadow:0 1px 4px rgba(16,24,40,.10);
+    background:#fff;display:flex;
+  }
+  .name-ko{letter-spacing:.01em;}
+
+  /* ===== NIKE ===== */
+  .nike{background:#111;color:#fff;flex-direction:column;justify-content:space-between;padding:30px 34px;}
+  .nike .sw{width:78px;}
+  .nike .sw path{fill:#fff;}
+  .nike .name{font-family:'Anton',sans-serif;font-size:46px;line-height:.95;text-transform:uppercase;letter-spacing:.01em;}
+  .nike .tagline{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.18em;color:#bbb;text-transform:uppercase;margin-top:4px;}
+  .nike .meta{display:flex;justify-content:space-between;align-items:flex-end;font-size:12px;font-weight:300;color:#cfcfcf;}
+  .nike .meta b{font-weight:400;color:#fff;}
+
+  /* ===== 배달의민족 ===== */
+  .baemin{background:#2AC1BC;color:#0c4f4d;flex-direction:column;justify-content:space-between;padding:28px 32px;font-family:'BMHANNA',sans-serif;}
+  .baemin .top{font-size:18px;}
+  .baemin .name{font-size:52px;line-height:1;}
+  .baemin .role{font-size:20px;margin-top:2px;}
+  .baemin .foot{font-size:18px;border-top:2px dashed rgba(12,79,77,.4);padding-top:10px;}
+
+  /* ===== 네이버 ===== */
+  .naver{background:#fff;color:#16181d;flex-direction:column;justify-content:space-between;padding:32px 34px;}
+  .naver .logo{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;background:#03C75A;color:#fff;border-radius:12px;font-size:30px;font-weight:700;}
+  .naver .name{font-size:24px;font-weight:700;}
+  .naver .role{font-size:13px;color:#03C75A;font-weight:700;margin-top:2px;}
+  .naver .contact{font-size:13px;color:#6b7280;}
+  .naver .bar{height:4px;width:46px;background:#03C75A;border-radius:2px;margin-bottom:14px;}
+
+  /* ===== 구글 ===== */
+  .google{background:#fff;color:#3c4043;font-family:'Roboto',sans-serif;flex-direction:column;justify-content:center;align-items:center;gap:14px;text-align:center;padding:30px;}
+  .google .name{font-size:44px;font-weight:500;letter-spacing:-.01em;}
+  .google .name .b{color:#4285F4;} .google .name .r{color:#EA4335;}
+  .google .name .y{color:#FBBC05;} .google .name .g{color:#34A853;}
+  .google .role{font-size:13px;font-weight:400;color:#5f6368;}
+  .google .contact{font-size:13px;font-weight:300;color:#80868b;}
+
+  /* ===== 쿠팡 ===== */
+  .coupang{background:#fff;color:#16181d;}
+  .coupang .side{width:42px;background:#E03B49;}
+  .coupang .body{flex:1;padding:30px 32px;display:flex;flex-direction:column;justify-content:space-between;}
+  .coupang .brand{font-size:30px;font-weight:700;color:#E03B49;letter-spacing:-.01em;}
+  .coupang .brand .rocket{font-weight:300;color:#16181d;font-size:18px;}
+  .coupang .role{font-size:13px;color:#6b7280;font-weight:300;margin-top:2px;}
+  .coupang .name{font-size:22px;font-weight:700;}
+  .coupang .contact{font-size:13px;color:#6b7280;font-weight:300;margin-top:4px;}
+
+  /* ===== 카카오톡 ===== */
+  .kakao{background:#FEE500;color:#3C1E1E;flex-direction:column;justify-content:space-between;padding:30px 34px;font-family:'Jua','Pretendard',sans-serif;}
+  .kakao .bubble{display:inline-block;background:#3C1E1E;color:#FEE500;border-radius:16px 16px 16px 4px;padding:8px 16px;font-size:22px;}
+  .kakao .name{font-size:40px;line-height:1;}
+  .kakao .role{font-size:17px;color:#6b4a4a;}
+  .kakao .contact{font-size:17px;color:#6b4a4a;}
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>DRT 명함 — 브랜드 버전 6종</h1>
+    <p>변민준 · 풀스택 개발자 · 010 7466 7775 · 각 브랜드 시그니처 색·폰트 적용, 얇은 굵기 위주</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- NIKE -->
+    <div class="item">
+      <div class="tag">NIKE — 블랙 미니멀, 스우시</div>
+      <div class="card nike">
+        <svg class="sw" viewBox="0 0 120 48"><path d="M10 40 C 35 18, 72 6, 112 5 C 72 12, 40 26, 22 42 C 15 46, 9 45, 10 40 Z"/></svg>
+        <div>
+          <div class="name">변민준</div>
+          <div class="tagline">JUST DEVELOP IT</div>
+        </div>
+        <div class="meta">
+          <span>DRT · FULL-STACK DEVELOPER</span>
+          <span><b>010 7466 7775</b></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 배달의민족 -->
+    <div class="item">
+      <div class="tag">배달의민족 — 민트 + 한나체, 위트</div>
+      <div class="card baemin">
+        <div class="top">우리가 어떤 개발자인지<br>알려주겠어</div>
+        <div>
+          <div class="name">변민준</div>
+          <div class="role">DRT 풀스택 개발자</div>
+        </div>
+        <div class="foot">전화는 010-7466-7775</div>
+      </div>
+    </div>
+
+    <!-- 네이버 -->
+    <div class="item">
+      <div class="tag">네이버 — 그린 포인트, 깔끔</div>
+      <div class="card naver">
+        <div class="logo">D</div>
+        <div>
+          <div class="bar"></div>
+          <div class="name name-ko">변민준</div>
+          <div class="role">DRT · FULL-STACK DEVELOPER</div>
+        </div>
+        <div class="contact">M. 010 7466 7775 · 풀스택 개발자</div>
+      </div>
+    </div>
+
+    <!-- 구글 -->
+    <div class="item">
+      <div class="tag">구글 — 4색 로고, 여백 미니멀</div>
+      <div class="card google">
+        <div class="name"><span class="b">D</span><span class="r">R</span><span class="y">T</span></div>
+        <div class="role name-ko">변민준 · 풀스택 개발자</div>
+        <div class="contact">010 7466 7775</div>
+      </div>
+    </div>
+
+    <!-- 쿠팡 -->
+    <div class="item">
+      <div class="tag">쿠팡 — 레드 사이드바, 로켓</div>
+      <div class="card coupang">
+        <div class="side"></div>
+        <div class="body">
+          <div>
+            <div class="brand">DRT <span class="rocket">↗</span></div>
+            <div class="role">FULL-STACK DEVELOPER</div>
+          </div>
+          <div>
+            <div class="name name-ko">변민준</div>
+            <div class="contact">M. 010 7466 7775 · 풀스택 개발자</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 카카오톡 -->
+    <div class="item">
+      <div class="tag">카카오톡 — 옐로 + 말풍선, 친근</div>
+      <div class="card kakao">
+        <div><span class="bubble">DRT 개발자예요</span></div>
+        <div>
+          <div class="name name-ko">변민준</div>
+          <div class="role">풀스택 개발자</div>
+        </div>
+        <div class="contact">010-7466-7775</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

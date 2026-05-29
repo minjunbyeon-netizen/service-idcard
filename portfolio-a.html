@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AD — Studio Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfbf9; --ink:#14110f; --sub:#76716b; --line:#e3e0d9;
+    --accent:#1f48d6; --max:1140px;
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,251,249,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:var(--serif);font-size:22px;font-weight:500;letter-spacing:-.01em}
+  .navlinks{display:flex;gap:34px;font-size:13.5px;color:var(--sub);letter-spacing:.01em}
+  .navlinks a:hover{color:var(--ink)}
+
+  /* HERO */
+  .hero{padding:120px 0 90px}
+  .kline{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--sub);letter-spacing:.06em;text-transform:uppercase;margin-bottom:40px}
+  .kline::before{content:"";width:34px;height:1px;background:var(--ink)}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,7vw,86px);line-height:1.04;letter-spacing:-.02em}
+  .hero h1 i{font-style:italic;color:var(--accent)}
+  .hero .lead{margin-top:36px;max-width:520px;font-size:18px;color:#3c3833}
+  .hero .meta{margin-top:48px;display:flex;gap:52px;flex-wrap:wrap;padding-top:30px;border-top:1px solid var(--line)}
+  .hero .meta div b{font-family:var(--serif);display:block;font-size:32px;font-weight:500;letter-spacing:-.01em}
+  .hero .meta div span{font-size:13px;color:var(--sub)}
+
+  section{padding:90px 0;border-top:1px solid var(--line)}
+  .secnum{font-family:var(--serif);font-size:15px;color:var(--accent);font-style:italic}
+  .sectitle{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;margin-top:8px}
+  .secintro{color:var(--sub);max-width:560px;margin-top:18px;font-size:16.5px}
+
+  /* WORKS — editorial list */
+  .worklist{margin-top:50px;border-top:1px solid var(--line)}
+  .work{display:grid;grid-template-columns:64px 1.4fr 1fr 120px;gap:24px;align-items:center;padding:26px 6px;border-bottom:1px solid var(--line);transition:.18s}
+  .work:hover{background:#fff;padding-left:18px}
+  .work .no{font-family:var(--serif);font-style:italic;color:var(--sub)}
+  .work .nm{font-family:var(--serif);font-size:23px;letter-spacing:-.01em}
+  .work .ds{color:var(--sub);font-size:14.5px}
+  .work .yr{text-align:right;color:var(--sub);font-size:13px}
+
+  /* CAPABILITIES (전문 기술 매트릭스) */
+  .cap{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .capcell{background:var(--bg);padding:30px}
+  .capcell h4{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .capcell ul{list-style:none}
+  .capcell li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+  .capcell li:last-child{border:0}
+  .capcell li span:last-child{color:var(--sub);font-size:13px}
+
+  /* CONTACT */
+  .contact{padding:110px 0}
+  .contact .wrap{text-align:center}
+  .contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,6vw,64px);letter-spacing:-.02em}
+  .contact .mail{display:inline-block;margin-top:26px;font-family:var(--serif);font-style:italic;font-size:24px;color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:4px}
+  .contact .sub{margin-top:30px;color:var(--sub);font-size:14px;letter-spacing:.04em}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;font-size:12.5px;color:var(--sub)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(max-width:760px){
+    .work{grid-template-columns:1fr;gap:4px}.work .yr{text-align:left}
+    .cap{grid-template-columns:1fr}.navlinks{display:none}.wrap{padding:0 24px}
+  }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="logo">AD — Studio</div>
+  <div class="navlinks"><a href="#work">Selected Work</a><a href="#cap">Capabilities</a><a href="#contact">Contact</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="kline">분양 홈페이지 전문 / Web Developer · Seoul</div>
+  <h1>분양의 흐름을<br><i>전환</i>으로 설계합니다.</h1>
+  <p class="lead">모델하우스 방문 예약부터 관심고객 등록까지, 데이터로 검증된 분양 웹을 만듭니다. 디자인과 성능, 둘 다 타협하지 않아요.</p>
+  <div class="meta">
+    <div><b>50<i style="font-style:italic">+</i></b><span>제작한 분양 사이트</span></div>
+    <div><b>8 yrs</b><span>분양 웹 전문 경력</span></div>
+    <div><b>1.4 s</b><span>평균 LCP 로딩</span></div>
+    <div><b>95+</b><span>Lighthouse 성능</span></div>
+  </div>
+</div></header>
+
+<section id="work"><div class="wrap">
+  <div class="secnum">01</div>
+  <div class="sectitle">Selected Work</div>
+  <p class="secintro">현장명·연도는 예시예요. 실제로는 줄을 누르면 상세 케이스로 들어가게 만듭니다.</p>
+  <div class="worklist">
+    <div class="work"><div class="no">01</div><div class="nm">○○ 자이 더 센트럴</div><div class="ds">아파트 분양 · 관심고객 등록 + 모델하우스 예약</div><div class="yr">2025</div></div>
+    <div class="work"><div class="no">02</div><div class="nm">○○ 스카이뷰 레지던스</div><div class="ds">오피스텔 · 평형별 안내 + 360° 투어</div><div class="yr">2025</div></div>
+    <div class="work"><div class="no">03</div><div class="nm">○○ 테크노밸리</div><div class="ds">지식산업센터 · 투자수익 계산기</div><div class="yr">2024</div></div>
+    <div class="work"><div class="no">04</div><div class="nm">○○ 스퀘어 스트리트</div><div class="ds">상가 분양 · 층별 매물 현황판</div><div class="yr">2024</div></div>
+    <div class="work"><div class="no">05</div><div class="nm">○○ 마리나 베이</div><div class="ds">생활형 숙박 · 분양 일정 카운트다운</div><div class="yr">2023</div></div>
+  </div>
+</div></section>
+
+<section id="cap"><div class="wrap">
+  <div class="secnum">02</div>
+  <div class="sectitle">Capabilities</div>
+  <p class="secintro">분양 사이트 한 채를 처음부터 끝까지 혼자 책임질 수 있는 스택이에요.</p>
+  <div class="cap">
+    <div class="capcell"><h4>Frontend</h4><ul>
+      <li><span>HTML5 · 시맨틱 마크업</span><span>전문</span></li>
+      <li><span>CSS3 · 반응형 · 애니메이션</span><span>전문</span></li>
+      <li><span>JavaScript (ES6+)</span><span>전문</span></li>
+      <li><span>React · 컴포넌트 설계</span><span>활용</span></li>
+    </ul></div>
+    <div class="capcell"><h4>Backend &amp; Data</h4><ul>
+      <li><span>Node.js · PHP</span><span>활용</span></li>
+      <li><span>MySQL · 관심고객 DB</span><span>전문</span></li>
+      <li><span>REST API 설계·연동</span><span>전문</span></li>
+      <li><span>관리자 페이지 · DB 추출</span><span>전문</span></li>
+    </ul></div>
+    <div class="capcell"><h4>분양 특화 연동</h4><ul>
+      <li><span>카카오 알림톡 자동 발송</span><span>전문</span></li>
+      <li><span>네이버 · 구글 지도</span><span>전문</span></li>
+      <li><span>SMS · 전화 클릭 추적</span><span>전문</span></li>
+      <li><span>360° 투어 · 평면도 뷰어</span><span>활용</span></li>
+    </ul></div>
+    <div class="capcell"><h4>성능 · 마케팅</h4><ul>
+      <li><span>GA4 · Meta · 네이버 픽셀</span><span>전문</span></li>
+      <li><span>Lighthouse 95+ 최적화</span><span>전문</span></li>
+      <li><span>SEO · 구조화 데이터</span><span>전문</span></li>
+      <li><span>CDN · 캐싱 · 이미지 압축</span><span>전문</span></li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+  <div class="secnum">03</div>
+  <h2>다음 분양 현장,<br>함께 만들어요.</h2>
+  <a href="mailto:cheb2oy@naver.com" class="mail">cheb2oy@naver.com</a>
+  <div class="sub">+82 10-7466-7775 · DRT WEB STUDIO · SEOUL, KR</div>
+</div></section>
+
+<footer><div class="wrap"><span>© 2026 AD · DRT Web Studio</span><span>Seoul, Republic of Korea</span></div></footer>
+</body>
+</html>

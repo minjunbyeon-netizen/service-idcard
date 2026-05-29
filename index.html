@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT 명함 — AD (Tech Mono)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',-apple-system,sans-serif;background:#d9dbdf;color:#16181d;
+       min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:24px;padding:48px 24px 80px;-webkit-font-smoothing:antialiased;}
+  .head{text-align:center;}
+  .head h1{font-size:24px;font-weight:600;letter-spacing:-.02em;}
+  .head p{color:#5b6068;font-size:13px;margin-top:8px;font-weight:300;}
+
+  .stage{width:100%;max-width:880px;display:flex;justify-content:center;}
+
+  /* ===== Tech Mono 명함 (90x50mm 비율) — 크기는 카드 폭 기준(cqw)이라 확대해도 안 깨짐 ===== */
+  .card{
+    width:100%;max-width:860px;aspect-ratio:486/270;
+    container-type:inline-size;
+    background:#0d0f14;color:#e9edf2;
+    font-family:'Space Grotesk',sans-serif;
+    border-radius:3.4cqw;overflow:hidden;
+    box-shadow:0 14px 40px rgba(8,10,14,.30);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:7.6cqw 7.6cqw;
+  }
+  .card .top{display:flex;justify-content:space-between;align-items:center;}
+  .prompt{font-size:2.4cqw;color:#7a828f;font-weight:400;}
+  .prompt b{color:#7cf6c8;font-weight:500;}
+  .brandtag{font-size:2.1cqw;letter-spacing:.18em;color:#7a828f;text-align:right;font-weight:500;}
+  .brandtag b{color:#e9edf2;font-weight:700;}
+
+  .mid{display:flex;flex-direction:column;}
+  .mono{font-size:12cqw;font-weight:300;letter-spacing:-.01em;line-height:1;display:inline-flex;align-items:center;}
+  .mono .cur{width:.05em;height:.74em;background:#7cf6c8;margin-left:.16em;border-radius:1px;animation:blink 1.05s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .role{font-size:2.7cqw;color:#aeb6c2;font-weight:400;margin-top:3.4cqw;}
+  .role b{color:#e9edf2;font-weight:500;}
+
+  .bottom{display:flex;flex-direction:column;}
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw 5%;font-size:2.5cqw;color:#cfd4dc;font-weight:400;}
+  .contact .k{color:#7cf6c8;display:inline-block;width:12cqw;}
+  .footline{display:flex;justify-content:space-between;font-size:2.1cqw;color:#6b7280;margin-top:4cqw;}
+
+  .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .btn{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;border:0;border-radius:10px;padding:12px 22px;cursor:pointer;background:#16181d;color:#fff;}
+  .btn.sec{background:#fff;color:#16181d;border:1px solid #cdd1d6;}
+  .hint{font-size:12px;color:#5b6068;font-weight:300;text-align:center;max-width:560px;line-height:1.7;}
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>DRT 명함 — AD</h1>
+    <p>Tech Mono · 다크 터미널 · 고화질 다운로드</p>
+  </div>
+
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="top">
+        <div class="prompt">$ <b>whoami</b></div>
+        <div class="brandtag"><b>DRT</b> — WEB STUDIO</div>
+      </div>
+      <div class="mid">
+        <div class="mono">AD<span class="cur"></span></div>
+        <div class="role"><b>Full-Stack Developer</b> / Web Specialist</div>
+      </div>
+      <div class="bottom">
+        <div class="contact">
+          <div><span class="k">mobile</span>+82 10-7466-7775</div>
+          <div><span class="k">email</span>cheb2oy@naver.com</div>
+          <div><span class="k">web</span>www.drt.dev</div>
+          <div><span class="k">git</span>github.com/ad-drt</div>
+        </div>
+        <div class="footline"><span>// build the web</span><span>Seoul, KR</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn" id="dl">고화질 PNG 다운로드 (3배)</button>
+    <button class="btn sec" id="dl2">초고화질 PNG (4배)</button>
+  </div>
+  <div class="hint">버튼을 누르면 명함 한 장이 투명 배경 PNG로 저장돼요. 카카오톡·메일로 그대로 넘기시면 돼요. (인쇄용으로도 충분한 해상도예요.)</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.js"></script>
+  <script>
+    async function save(ratio){
+      const node = document.getElementById('card');
+      const url = await htmlToImage.toPng(node, {pixelRatio: ratio, cacheBust: true});
+      const a = document.createElement('a');
+      a.download = 'DRT-AD-card.png';
+      a.href = url; a.click();
+    }
+    document.getElementById('dl').addEventListener('click', ()=>save(3));
+    document.getElementById('dl2').addEventListener('click', ()=>save(4));
+  </script>
+</body>
+</html>
