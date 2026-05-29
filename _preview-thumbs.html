@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미리보기 — 작업목록 썸네일</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0c0e13;--bg2:#11141b;--ink:#eef1f5;--sub:#8a93a3;--line:#1e232d;--mint:#7cf6c8;--font:'Space Grotesk',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+  .top{padding:60px 0 10px}
+  .note{font-family:var(--mono);font-size:12px;color:var(--mint);letter-spacing:.04em}
+  .secnum{font-family:var(--mono);font-size:13px;color:var(--mint);margin-top:40px}
+  .sectitle{font-size:42px;font-weight:300;letter-spacing:-.025em;margin-top:10px}
+  .secintro{margin-top:14px;color:var(--sub);font-size:15px}
+  .worklist{margin-top:46px;border-top:1px solid var(--line)}
+
+  /* === 안(A): 행 왼쪽 썸네일 === */
+  .work{display:grid;grid-template-columns:150px 40px 1fr auto auto;align-items:center;gap:22px;
+    padding:18px 8px;border-bottom:1px solid var(--line);transition:background .2s ease;cursor:pointer}
+  .work:hover{background:var(--bg2)}
+  .work:hover .thumb img{transform:scale(1.05)}
+  .thumb{width:150px;height:92px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#000}
+  .thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .35s ease}
+  .thumb.contain{background:#0a0c10}
+  .thumb.contain img{object-fit:contain;object-position:center}
+  .no{font-family:var(--mono);font-size:13px;color:var(--sub)}
+  .nm{font-size:18px;font-weight:400}
+  .nm small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--sub);margin-top:5px;font-weight:400}
+  .out{font-family:var(--mono);font-size:13px;color:var(--mint);text-align:right;white-space:nowrap}
+  .out span{display:block;color:var(--sub);font-size:11px}
+  .yr{font-family:var(--mono);font-size:13px;color:var(--sub)}
+
+  @media(max-width:760px){
+    .work{grid-template-columns:96px 1fr;gap:14px;row-gap:4px;padding:16px 4px}
+    .work .no{display:none}
+    .thumb{width:96px;height:60px;grid-row:span 2}
+    .out,.yr{text-align:left;font-size:12px}
+    .out{grid-column:2}.yr{grid-column:2}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="note">// 미리보기 — 작업목록에 실제 화면 썸네일을 붙인 모습 (이 파일은 시안용, 실제 사이트 아님)</span></div>
+  <div class="secnum">02 — work</div>
+  <div class="sectitle">SELECTED WORK</div>
+  <p class="secintro">직접 만든 프로젝트 여섯 개 · 웹 · 앱 · AI · 내부 도구까지 분야가 다릅니다</p>
+
+  <div class="worklist">
+    <div class="work">
+      <div class="thumb"><img src="shots/proj0.png" alt=""></div>
+      <div class="no">01</div>
+      <div class="nm">CLIENT-HIVE · 광고 에이전시 홈페이지 개발 · 관리자(CMS) 백엔드 총괄<small>Website · 에이전시 CMS · Flask · MySQL</small></div>
+      <div class="out">LIVE<span>Railway 운영</span></div>
+      <div class="yr">2025</div>
+    </div>
+    <div class="work">
+      <div class="thumb"><img src="shots/proj1.png" alt=""></div>
+      <div class="no">02</div>
+      <div class="nm">AUTOBLOG · 보도자료를 블로그 글로 자동 생성하는 AI 서비스 개발<small>AI SaaS · 보도자료 → 블로그 · Flask · Claude</small></div>
+      <div class="out">LIVE<span>Railway 운영</span></div>
+      <div class="yr">2025</div>
+    </div>
+    <div class="work">
+      <div class="thumb contain"><img src="shots/proj2b.png" alt=""></div>
+      <div class="no">03</div>
+      <div class="nm">FACING · 크로스핏 운동 페이스 계산 앱 개발 (모바일 앱 + 서버)<small>Mobile · 앱 + 계산 API · Flutter · Flask</small></div>
+      <div class="out">iOS·안드로이드<span>둘 다 지원</span></div>
+      <div class="yr">2025</div>
+    </div>
+    <div class="work">
+      <div class="thumb"><img src="shots/wc_dashboard.png" alt=""></div>
+      <div class="no">04</div>
+      <div class="nm">WORKCHECK · 인력사무소 노무 관리 프로그램 개발 (사진 자동 입력)<small>Internal · OCR 노무 관리 · Flask · PWA</small></div>
+      <div class="out">OCR<span>자동 입력</span></div>
+      <div class="yr">2024</div>
+    </div>
+    <div class="work">
+      <div class="thumb"><img src="shots/proj4.png" alt=""></div>
+      <div class="no">05</div>
+      <div class="nm">CHUNKING · 영어 학습 전자책(e-book) 제작 · 조판<small>E-Book · HTML → PDF 출판 · HTML · CSS</small></div>
+      <div class="out">e-book<span>HTML→PDF</span></div>
+      <div class="yr">2025</div>
+    </div>
+    <div class="work">
+      <div class="thumb"><img src="shots/proj5.png" alt=""></div>
+      <div class="no">06</div>
+      <div class="nm">CLIENT-GANGSEO · 부산 강서 시니어클럽 홈페이지 개발 · 관리자 백엔드 총괄<small>Client Site · 기관 홈페이지 · HTML · Firebase</small></div>
+      <div class="out">Active<span>운영 중</span></div>
+      <div class="yr">2024</div>
+    </div>
+  </div>
+  <div style="height:80px"></div>
+</div>
+</body>
+</html>
