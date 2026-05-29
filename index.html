@@ -98,7 +98,8 @@
     opacity:0;visibility:hidden;transition:opacity .3s ease, visibility .3s;display:flex;align-items:center;justify-content:center;padding:28px}
   .modal-ov.open{opacity:1;visibility:visible}
   .modal{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:20px;
-    max-width:640px;width:100%;max-height:86vh;overflow:auto;padding:46px;
+    max-width:640px;width:100%;max-height:86vh;overflow-y:auto;overflow-x:hidden;padding:46px;
+    overflow-wrap:anywhere;
     transform:translateY(22px) scale(.98);transition:transform .35s cubic-bezier(.22,.61,.36,1)}
   .modal-ov.open .modal{transform:none}
   .modal-x{position:absolute;top:20px;right:22px;background:none;border:0;color:var(--sub);
@@ -188,6 +189,23 @@
     .quotes{grid-template-columns:1fr}
     .work::after{display:none}
     .navlinks{gap:22px}.wrap{padding:0 24px}
+  }
+
+  @media(max-width:560px){
+    .modal-ov{padding:12px}
+    .modal{padding:26px 20px;border-radius:16px;max-height:92vh}
+    .modal-x{top:14px;right:14px}
+    .modal h3{font-size:21px;line-height:1.3}
+    .modal .msub{font-size:12px}
+    .modal .mdesc{font-size:14px;line-height:1.7}
+    .modal ul li{font-size:13.5px;padding:6px 0}
+    .modal .mmeta{gap:16px 22px;margin-top:20px;padding-top:18px}
+    .modal .mmeta div b{font-size:17px}
+    .modal .msec{margin-top:22px}
+    .modal .mshot.fit-contain{aspect-ratio:4/5}
+    .modal .mthumb{width:52px;height:33px}
+    .modal .mtags span{font-size:11px;padding:4px 11px}
+    .hero-cta{width:100%;justify-content:center}
   }
 </style>
 </head>
