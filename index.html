@@ -84,8 +84,7 @@
   .bio em{font-style:normal;color:var(--mint)}
 
   /* WORKS — 작품 슬라이더 */
-  .ptabs{display:flex;gap:8px;margin-top:42px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
-  .ptabs::-webkit-scrollbar{display:none}
+  .ptabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:42px}
   .ptab{flex:0 0 auto;background:transparent;border:1px solid var(--line);border-radius:999px;
     color:var(--sub);font-family:var(--mono);font-size:12.5px;padding:8px 16px;white-space:nowrap;
     transition:color .2s,border-color .2s,background .2s}
@@ -131,8 +130,8 @@
   .pcount{font-family:var(--mono);font-size:13px;color:var(--sub)}
   .pcount b{color:var(--ink);font-weight:400}
   .pdots{display:flex;gap:8px}
-  .pdot{width:8px;height:8px;border-radius:50%;background:#2a323d;border:none;padding:0;transition:background .2s,width .2s}
-  .pdot.on{background:var(--mint);width:20px;border-radius:5px}
+  .pdot{width:8px;height:8px;border-radius:50%;background:#2a323d;border:none;padding:0;transition:background .2s,transform .2s}
+  .pdot.on{background:var(--mint);transform:scale(1.45)}
 
   /* 보조: 전체 목록(row 표) — 슬라이더 아래 */
   .worklabel{font-family:var(--mono);font-size:12.5px;color:var(--sub);letter-spacing:.04em;margin-top:64px}
@@ -719,7 +718,6 @@
     dots.forEach(function (t, k) { t.classList.toggle('on', k === i); });
     if (prev) prev.disabled = i === 0;
     if (next) next.disabled = i === slides - 1;
-    if (user && tabs[i] && tabs[i].scrollIntoView) tabs[i].scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
   }
   tabs.forEach(function (t, k) { t.addEventListener('click', function () { go(k, true); }); });
   if (prev) prev.addEventListener('click', function () { go(i - 1, true); });
