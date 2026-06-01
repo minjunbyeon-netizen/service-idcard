@@ -83,20 +83,62 @@
   .bio p:last-child{margin-bottom:0}
   .bio em{font-style:normal;color:var(--mint)}
 
-  /* WORKS */
-  .worklist{margin-top:46px;border-top:1px solid var(--line)}
-  .work{display:grid;grid-template-columns:52px 1.6fr 140px 64px 22px;gap:22px;align-items:center;padding:24px 8px;border-bottom:1px solid var(--line);transition:.18s}
-  .work:hover{background:var(--bg2);padding-left:20px}
-  .work::after{content:"→";font-family:var(--mono);font-size:14px;color:var(--mint);opacity:.25;justify-self:end;transition:opacity .2s ease, transform .2s ease}
-  .work:hover::after{opacity:1;transform:translateX(4px)}
-  .work .no{font-family:var(--mono);color:var(--mint);font-size:14px}
-  .work .nm{font-size:21px;font-weight:400}
-  .work .nm small{display:block;color:var(--sub);font-size:13px;font-weight:300;margin-top:4px;font-family:var(--mono)}
-  .work .out{font-family:var(--mono);font-size:13px;color:var(--mint)}
-  .work .out span{color:var(--sub);display:block;font-size:11px;margin-top:2px}
-  .work .yr{text-align:right;font-family:var(--mono);color:var(--sub);font-size:13px}
-  .work{cursor:none}
-  .work:hover .nm{color:var(--mint)}
+  /* WORKS — 작품 슬라이더 */
+  .ptabs{display:flex;gap:8px;margin-top:42px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+  .ptabs::-webkit-scrollbar{display:none}
+  .ptab{flex:0 0 auto;background:transparent;border:1px solid var(--line);border-radius:999px;
+    color:var(--sub);font-family:var(--mono);font-size:12.5px;padding:8px 16px;white-space:nowrap;
+    transition:color .2s,border-color .2s,background .2s}
+  .ptab:hover{color:var(--ink);border-color:#33414e}
+  .ptab.on{color:#0c0e13;background:var(--mint);border-color:var(--mint)}
+
+  .pcarousel{position:relative;margin-top:22px}
+  .pstage{overflow:hidden;border-radius:18px}
+  .prail{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+  .pslide{flex:0 0 100%}
+  .pcard{display:grid;grid-template-columns:1.3fr 1fr;min-height:480px;background:var(--bg2);
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .25s}
+  .pcard:hover{border-color:#3a4a58}
+  .pcard .pshot{position:relative;overflow:hidden;background:#0a0c11;border-right:1px solid var(--line)}
+  .pcard .pshot img{width:100%;height:100%;object-fit:cover;object-position:top center;
+    filter:grayscale(1) brightness(.82);transition:filter .45s ease,transform .6s ease}
+  .pcard:hover .pshot img{filter:grayscale(0) brightness(1);transform:scale(1.04)}
+  .pcard .pshot.contain{background:#0a0c10}
+  .pcard .pshot.contain img{object-fit:contain;object-position:center;transform:none}
+  .pcard:hover .pshot.contain img{transform:scale(1.02)}
+  .pcard .pinfo{padding:46px;display:flex;flex-direction:column;justify-content:center}
+  .pinfo .ptop{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .pinfo .pno{font-family:var(--mono);color:var(--mint);font-size:14px}
+  .pinfo .pyr{font-family:var(--mono);color:var(--sub);font-size:13px}
+  .pinfo .pnm{font-size:34px;font-weight:300;line-height:1.18;letter-spacing:-.01em}
+  .pinfo .pdesc{color:var(--sub);font-size:15px;line-height:1.7;margin-top:18px;max-width:40ch}
+  .pinfo .ptags{display:flex;gap:8px;margin-top:26px;flex-wrap:wrap}
+  .pinfo .ptags span{font-family:var(--mono);font-size:12px;color:var(--sub);border:1px solid var(--line);border-radius:7px;padding:4px 10px}
+  .pinfo .ptags span.live{color:var(--mint);border-color:#27433a}
+  .pinfo .pmore{margin-top:30px;font-family:var(--mono);font-size:14px;color:var(--sub);transition:color .2s,transform .2s}
+  .pcard:hover .pmore{color:var(--mint);transform:translateX(4px)}
+
+  .parw{position:absolute;top:calc(50% - 26px);transform:translateY(-50%);z-index:5;width:46px;height:46px;
+    display:flex;align-items:center;justify-content:center;background:transparent;border:none;
+    color:var(--sub);font-size:34px;font-weight:300;line-height:1;font-family:var(--font);transition:color .2s,transform .2s}
+  .parw:hover{color:var(--mint)}
+  .parw:disabled{opacity:.22;color:var(--sub)}
+  .parw.prev{left:-56px}.parw.next{right:-56px}
+  .parw.prev:hover{transform:translateY(-50%) translateX(-3px)}
+  .parw.next:hover{transform:translateY(-50%) translateX(3px)}
+
+  .pfoot{display:flex;align-items:center;justify-content:space-between;margin-top:22px}
+  .pcount{font-family:var(--mono);font-size:13px;color:var(--sub)}
+  .pcount b{color:var(--ink);font-weight:400}
+  .pdots{display:flex;gap:8px}
+  .pdot{width:8px;height:8px;border-radius:50%;background:#2a323d;border:none;padding:0;transition:background .2s,width .2s}
+  .pdot.on{background:var(--mint);width:20px;border-radius:5px}
+
+  @media(max-width:1240px){
+    .parw.prev{left:8px}.parw.next{right:8px}
+    .parw{background:rgba(12,14,19,.5);border-radius:50%;width:42px;height:42px;font-size:28px}
+  }
+  @media(prefers-reduced-motion:reduce){.prail{transition:none}.pcard .pshot img{transition:none}}
 
   /* 프로젝트 모달 */
   .modal-ov{position:fixed;inset:0;z-index:200;background:rgba(6,8,12,.74);backdrop-filter:blur(6px);
@@ -188,11 +230,13 @@
 
   @media(max-width:820px){
     .about{grid-template-columns:1fr;gap:24px}
-    .work{grid-template-columns:1fr;gap:6px}.work .yr,.work .out{text-align:left}
+    .pcard{grid-template-columns:1fr;min-height:0}
+    .pcard .pshot{aspect-ratio:16/10;border-right:none;border-bottom:1px solid var(--line)}
+    .pcard .pshot.contain{aspect-ratio:4/3}
+    .pinfo{padding:30px 26px}.pinfo .pnm{font-size:27px}
     .proc{grid-template-columns:repeat(2,1fr)}
     .stack{grid-template-columns:repeat(2,1fr)}
     .quotes{grid-template-columns:1fr}
-    .work::after{display:none}
     .navlinks{gap:22px}.wrap{padding:0 24px}
   }
 
@@ -228,14 +272,13 @@
     .trust .wrap{gap:7px 14px;font-size:11px;padding-top:15px;padding-bottom:15px;justify-content:center;text-align:center}
     .trust .sep{display:none}
     .trust .wrap span[style]{margin-left:0 !important}
-    .worklist{margin-top:26px}
-    .work{padding:14px 4px;gap:3px}
-    .work .no{font-size:11px}
-    .work .nm{font-size:16px}
-    .work .nm small{font-size:11px;margin-top:3px}
-    .work .out{font-size:12px;margin-top:2px}
-    .work .out span{display:none}
-    .work .yr{font-size:11px}
+    .ptabs{margin-top:24px}
+    .ptab{font-size:11.5px;padding:7px 13px}
+    .pinfo{padding:24px 20px}
+    .pinfo .pnm{font-size:23px}
+    .pinfo .pdesc{font-size:13.5px;margin-top:14px}
+    .pinfo .ptags{margin-top:18px}
+    .pcount,.pcount b{font-size:12px}
     .stackwrap{margin-top:24px;padding:18px 16px}
     .stack{grid-template-columns:1fr 1fr;gap:16px 14px}
     .scol h4{font-size:11px;padding-bottom:9px;margin-bottom:9px}
@@ -296,14 +339,105 @@
   <div class="secnum">02 — work</div>
   <div class="sectitle">SELECTED WORK</div>
   <p class="secintro">직접 만든 프로젝트 일곱 개 · 웹 · 앱 · AI · 광고까지 분야가 다릅니다</p>
-  <div class="worklist">
-    <div class="work" data-proj="6" tabindex="0" role="button" aria-label="F45 상세 보기"><div class="no">01</div><div class="nm">F45 · 광고 랜딩페이지 + 캠페인 6개월 운영<small>Ad Campaign · 랜딩 + GA4 · GTM · 부울경 담당</small></div><div class="out">GA4·GTM<span>전환 추적</span></div><div class="yr">2024</div></div>
-    <div class="work" data-proj="0" tabindex="0" role="button" aria-label="client-hive 상세 보기"><div class="no">02</div><div class="nm">CLIENT-HIVE · 광고 에이전시 홈페이지 개발 · 관리자(CMS) 백엔드 총괄<small>Website · 에이전시 CMS · Flask · MySQL</small></div><div class="out">LIVE<span>Railway 운영</span></div><div class="yr">2025</div></div>
-    <div class="work" data-proj="1" tabindex="0" role="button" aria-label="autoblog 상세 보기"><div class="no">03</div><div class="nm">AUTOBLOG · 보도자료를 블로그 글로 자동 생성하는 AI 서비스 개발<small>AI SaaS · 보도자료 → 블로그 · Flask · Claude</small></div><div class="out">LIVE<span>Railway 운영</span></div><div class="yr">2025</div></div>
-    <div class="work" data-proj="2" tabindex="0" role="button" aria-label="facing 상세 보기"><div class="no">04</div><div class="nm">FACING · 크로스핏 운동 페이스 계산 앱 개발 (모바일 앱 + 서버)<small>Mobile · 앱 + 계산 API · Flutter · Flask</small></div><div class="out">iOS·안드로이드<span>둘 다 지원</span></div><div class="yr">2025</div></div>
-    <div class="work" data-proj="3" tabindex="0" role="button" aria-label="workcheck 상세 보기"><div class="no">05</div><div class="nm">WORKCHECK · 인력사무소 노무 관리 프로그램 개발 (사진 자동 입력)<small>Internal · OCR 노무 관리 · Flask · PWA</small></div><div class="out">OCR<span>자동 입력</span></div><div class="yr">2024</div></div>
-    <div class="work" data-proj="4" tabindex="0" role="button" aria-label="chunking 상세 보기"><div class="no">06</div><div class="nm">CHUNKING · 영어 학습 전자책(e-book) 제작 · 조판<small>E-Book · HTML → PDF 출판 · HTML · CSS</small></div><div class="out">e-book<span>HTML→PDF</span></div><div class="yr">2025</div></div>
-    <div class="work" data-proj="5" tabindex="0" role="button" aria-label="client-gangseo 상세 보기"><div class="no">07</div><div class="nm">CLIENT-GANGSEO · 부산 강서 시니어클럽 홈페이지 개발 · 관리자 백엔드 총괄<small>Client Site · 기관 홈페이지 · HTML · Firebase</small></div><div class="out">Active<span>운영 중</span></div><div class="yr">2024</div></div>
+
+  <div class="ptabs" id="ptabs">
+    <button class="ptab on" type="button">F45</button>
+    <button class="ptab" type="button">CLIENT-HIVE</button>
+    <button class="ptab" type="button">AUTOBLOG</button>
+    <button class="ptab" type="button">FACING</button>
+    <button class="ptab" type="button">WORKCHECK</button>
+    <button class="ptab" type="button">CHUNKING</button>
+    <button class="ptab" type="button">GANGSEO</button>
+  </div>
+
+  <div class="pcarousel">
+    <button class="parw prev" id="parwPrev" type="button" aria-label="이전 작품">‹</button>
+    <button class="parw next" id="parwNext" type="button" aria-label="다음 작품">›</button>
+    <div class="pstage"><div class="prail" id="prail">
+
+      <div class="pslide"><div class="pcard" data-proj="6" tabindex="0" role="button" aria-label="F45 상세 보기">
+        <div class="pshot"><img src="shots/f45_hero.png" alt="F45 광고 랜딩페이지 화면" loading="lazy"></div>
+        <div class="pinfo">
+          <div class="ptop"><span class="pno">01 / 07</span><span class="pyr">2024</span></div>
+          <div class="pnm">F45 · 광고 랜딩페이지</div>
+          <p class="pdesc">광고 유입 랜딩 제작 + GA4·GTM 전환 추적으로 6개월 캠페인 운영. (부산·울산·경남 담당)</p>
+          <div class="ptags"><span>GA4</span><span>GTM</span><span>전환추적</span></div>
+          <span class="pmore">자세히 보기 →</span>
+        </div>
+      </div></div>
+
+      <div class="pslide"><div class="pcard" data-proj="0" tabindex="0" role="button" aria-label="client-hive 상세 보기">
+        <div class="pshot"><img src="shots/proj0.png" alt="CLIENT-HIVE 화면" loading="lazy"></div>
+        <div class="pinfo">
+          <div class="ptop"><span class="pno">02 / 07</span><span class="pyr">2025</span></div>
+          <div class="pnm">CLIENT-HIVE</div>
+          <p class="pdesc">광고 에이전시 공식 홈페이지를 기획·디자인·개발·운영까지 단독. 관리자(CMS)에서 직접 발행하게 만들었어요.</p>
+          <div class="ptags"><span class="live">● LIVE</span><span>Flask</span><span>MySQL</span></div>
+          <span class="pmore">자세히 보기 →</span>
+        </div>
+      </div></div>
+
+      <div class="pslide"><div class="pcard" data-proj="1" tabindex="0" role="button" aria-label="autoblog 상세 보기">
+        <div class="pshot"><img src="shots/proj1.png" alt="AUTOBLOG 화면" loading="lazy"></div>
+        <div class="pinfo">
+          <div class="ptop"><span class="pno">03 / 07</span><span class="pyr">2025</span></div>
+          <div class="pnm">AUTOBLOG</div>
+          <p class="pdesc">보도자료를 넣으면 네이버 블로그 스타일 글로 자동으로 써주는 AI 서비스. 기획부터 AI 연동·배포까지 직접.</p>
+          <div class="ptags"><span class="live">● LIVE</span><span>AI SaaS</span><span>Claude</span></div>
+          <span class="pmore">자세히 보기 →</span>
+        </div>
+      </div></div>
+
+      <div class="pslide"><div class="pcard" data-proj="2" tabindex="0" role="button" aria-label="facing 상세 보기">
+        <div class="pshot contain"><img src="shots/proj2b.png" alt="FACING 앱 화면" loading="lazy"></div>
+        <div class="pinfo">
+          <div class="ptop"><span class="pno">04 / 07</span><span class="pyr">2025</span></div>
+          <div class="pnm">FACING</div>
+          <p class="pdesc">크로스핏 운동 페이스를 계산해주는 모바일 앱 + 서버. iOS·안드로이드 모두 지원해요.</p>
+          <div class="ptags"><span>iOS·AOS</span><span>Flutter</span><span>Flask</span></div>
+          <span class="pmore">자세히 보기 →</span>
+        </div>
+      </div></div>
+
+      <div class="pslide"><div class="pcard" data-proj="3" tabindex="0" role="button" aria-label="workcheck 상세 보기">
+        <div class="pshot"><img src="shots/proj3.png" alt="WORKCHECK 화면" loading="lazy"></div>
+        <div class="pinfo">
+          <div class="ptop"><span class="pno">05 / 07</span><span class="pyr">2024</span></div>
+          <div class="pnm">WORKCHECK</div>
+          <p class="pdesc">인력사무소 노무 관리 프로그램. 신분증·통장을 폰으로 찍으면 OCR로 자동 입력돼요.</p>
+          <div class="ptags"><span>OCR</span><span>PWA</span><span>Flask</span></div>
+          <span class="pmore">자세히 보기 →</span>
+        </div>
+      </div></div>
+
+      <div class="pslide"><div class="pcard" data-proj="4" tabindex="0" role="button" aria-label="chunking 상세 보기">
+        <div class="pshot"><img src="shots/proj4.png" alt="CHUNKING 전자책 화면" loading="lazy"></div>
+        <div class="pinfo">
+          <div class="ptop"><span class="pno">06 / 07</span><span class="pyr">2025</span></div>
+          <div class="pnm">CHUNKING</div>
+          <p class="pdesc">‘청킹’ 방식 영어 학습 전자책 제작·조판. 화면 그대로 PDF로 출판했어요.</p>
+          <div class="ptags"><span>e-book</span><span>HTML</span><span>CSS</span></div>
+          <span class="pmore">자세히 보기 →</span>
+        </div>
+      </div></div>
+
+      <div class="pslide"><div class="pcard" data-proj="5" tabindex="0" role="button" aria-label="client-gangseo 상세 보기">
+        <div class="pshot"><img src="shots/proj5.png" alt="CLIENT-GANGSEO 화면" loading="lazy"></div>
+        <div class="pinfo">
+          <div class="ptop"><span class="pno">07 / 07</span><span class="pyr">2024</span></div>
+          <div class="pnm">CLIENT-GANGSEO</div>
+          <p class="pdesc">부산 강서 시니어클럽 공식 홈페이지 + 관리자 백엔드 총괄. 시니어도 보기 편한 가독성에 집중.</p>
+          <div class="ptags"><span>Active</span><span>Firebase</span></div>
+          <span class="pmore">자세히 보기 →</span>
+        </div>
+      </div></div>
+
+    </div></div>
+
+    <div class="pfoot">
+      <div class="pcount"><b id="pcur">01</b> / 07</div>
+      <div class="pdots" id="pdots"></div>
+    </div>
   </div>
 </div></section>
 
@@ -491,7 +625,7 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
-  document.querySelectorAll('.work[data-proj]').forEach(function (el) {
+  document.querySelectorAll('.pcard[data-proj]').forEach(function (el) {
     el.addEventListener('click', function () { open(+el.getAttribute('data-proj')); });
     el.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(+el.getAttribute('data-proj')); }
@@ -514,6 +648,47 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) lb.classList.remove('open'); });
   }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ov.classList.contains('open')) close(); });
+}());
+</script>
+
+<!-- 작품 슬라이더 (탭 · 화살표 · 점 동기화) -->
+<script>
+(function () {
+  var rail = document.getElementById('prail');
+  if (!rail) return;
+  var slides = rail.children.length;
+  var prev = document.getElementById('parwPrev');
+  var next = document.getElementById('parwNext');
+  var tabsBox = document.getElementById('ptabs');
+  var dotsBox = document.getElementById('pdots');
+  var cur = document.getElementById('pcur');
+  var tabs = [].slice.call(tabsBox ? tabsBox.querySelectorAll('.ptab') : []);
+  var i = 0;
+
+  for (var d = 0; d < slides; d++) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pdot' + (d === 0 ? ' on' : '');
+    b.setAttribute('aria-label', (d + 1) + '번째 작품 보기');
+    (function (n) { b.addEventListener('click', function () { go(n, true); }); })(d);
+    dotsBox.appendChild(b);
+  }
+  var dots = [].slice.call(dotsBox.children);
+
+  function go(n, user) {
+    i = Math.max(0, Math.min(slides - 1, n));
+    rail.style.transform = 'translateX(' + (-i * 100) + '%)';
+    if (cur) cur.textContent = ('0' + (i + 1)).slice(-2);
+    tabs.forEach(function (t, k) { t.classList.toggle('on', k === i); });
+    dots.forEach(function (t, k) { t.classList.toggle('on', k === i); });
+    if (prev) prev.disabled = i === 0;
+    if (next) next.disabled = i === slides - 1;
+    if (user && tabs[i] && tabs[i].scrollIntoView) tabs[i].scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  }
+  tabs.forEach(function (t, k) { t.addEventListener('click', function () { go(k, true); }); });
+  if (prev) prev.addEventListener('click', function () { go(i - 1, true); });
+  if (next) next.addEventListener('click', function () { go(i + 1, true); });
+  go(0, false);
 }());
 </script>
 
@@ -641,10 +816,9 @@
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
-  var sel = 'section .secnum, section .sectitle, section .secintro, .bio, .work, .stackwrap, .proc, .contact .meta, .contact h2, .contact .promise, .contact .mail, .contact .sub';
+  var sel = 'section .secnum, section .sectitle, section .secintro, .bio, .ptabs, .pcarousel, .stackwrap, .proc, .contact .meta, .contact h2, .contact .promise, .contact .mail, .contact .sub';
   var els = document.querySelectorAll(sel);
   els.forEach(function (el) { el.classList.add('reveal'); });
-  document.querySelectorAll('.work').forEach(function (el, i) { el.style.transitionDelay = (i * 0.06) + 's'; });
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) e.target.classList.add('in');
@@ -754,7 +928,7 @@
     requestAnimationFrame(loop);
   })();
 
-  var HOVER = 'a, button, [role="button"], input, select, textarea, label, .work, .pstep, .scol li';
+  var HOVER = 'a, button, [role="button"], input, select, textarea, label, .pcard, .ptab, .parw, .pdot, .pstep, .scol li';
   document.addEventListener('mouseover', function (e) {
     if (e.target.closest(HOVER)) {
       ring.style.width = '18px'; ring.style.height = '18px';
