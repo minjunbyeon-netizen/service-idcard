@@ -100,7 +100,7 @@
     border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .25s}
   .pcard:hover{border-color:#3a4a58}
   .pcard .pshot{position:relative;overflow:hidden;background:#0a0c11;border-right:1px solid var(--line)}
-  .pcard .pshot img{width:100%;height:100%;object-fit:cover;object-position:top center;
+  .pcard .pshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;
     filter:grayscale(1) brightness(.82);transition:filter .45s ease,transform .6s ease}
   .pcard:hover .pshot img{filter:grayscale(0) brightness(1);transform:scale(1.04)}
   .pcard .pshot.contain{background:#0a0c10}
