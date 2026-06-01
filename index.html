@@ -134,6 +134,21 @@
   .pdot{width:8px;height:8px;border-radius:50%;background:#2a323d;border:none;padding:0;transition:background .2s,width .2s}
   .pdot.on{background:var(--mint);width:20px;border-radius:5px}
 
+  /* 보조: 전체 목록(row 표) — 슬라이더 아래 */
+  .worklabel{font-family:var(--mono);font-size:12.5px;color:var(--sub);letter-spacing:.04em;margin-top:64px}
+  .worklist{margin-top:16px;border-top:1px solid var(--line)}
+  .work{display:grid;grid-template-columns:52px 1.6fr 140px 64px 22px;gap:22px;align-items:center;padding:24px 8px;border-bottom:1px solid var(--line);transition:.18s}
+  .work:hover{background:var(--bg2);padding-left:20px}
+  .work::after{content:"→";font-family:var(--mono);font-size:14px;color:var(--mint);opacity:.25;justify-self:end;transition:opacity .2s ease, transform .2s ease}
+  .work:hover::after{opacity:1;transform:translateX(4px)}
+  .work .no{font-family:var(--mono);color:var(--mint);font-size:14px}
+  .work .nm{font-size:21px;font-weight:400}
+  .work .nm small{display:block;color:var(--sub);font-size:13px;font-weight:300;margin-top:4px;font-family:var(--mono)}
+  .work .out{font-family:var(--mono);font-size:13px;color:var(--mint)}
+  .work .out span{color:var(--sub);display:block;font-size:11px;margin-top:2px}
+  .work .yr{text-align:right;font-family:var(--mono);color:var(--sub);font-size:13px}
+  .work:hover .nm{color:var(--mint)}
+
   @media(max-width:1240px){
     .parw.prev{left:8px}.parw.next{right:8px}
     .parw{background:rgba(12,14,19,.5);border-radius:50%;width:42px;height:42px;font-size:28px}
@@ -234,6 +249,8 @@
     .pcard .pshot{aspect-ratio:16/10;border-right:none;border-bottom:1px solid var(--line)}
     .pcard .pshot.contain{aspect-ratio:4/3}
     .pinfo{padding:30px 26px}.pinfo .pnm{font-size:27px}
+    .work{grid-template-columns:1fr;gap:6px}.work .yr,.work .out{text-align:left}
+    .work::after{display:none}
     .proc{grid-template-columns:repeat(2,1fr)}
     .stack{grid-template-columns:repeat(2,1fr)}
     .quotes{grid-template-columns:1fr}
@@ -279,6 +296,14 @@
     .pinfo .pdesc{font-size:13.5px;margin-top:14px}
     .pinfo .ptags{margin-top:18px}
     .pcount,.pcount b{font-size:12px}
+    .worklabel{margin-top:40px}
+    .work{padding:14px 4px;gap:3px}
+    .work .no{font-size:11px}
+    .work .nm{font-size:16px}
+    .work .nm small{font-size:11px;margin-top:3px}
+    .work .out{font-size:12px;margin-top:2px}
+    .work .out span{display:none}
+    .work .yr{font-size:11px}
     .stackwrap{margin-top:24px;padding:18px 16px}
     .stack{grid-template-columns:1fr 1fr;gap:16px 14px}
     .scol h4{font-size:11px;padding-bottom:9px;margin-bottom:9px}
@@ -438,6 +463,17 @@
       <div class="pcount"><b id="pcur">01</b> / 07</div>
       <div class="pdots" id="pdots"></div>
     </div>
+  </div>
+
+  <div class="worklabel">전체 목록</div>
+  <div class="worklist">
+    <div class="work" data-proj="6" tabindex="0" role="button" aria-label="F45 상세 보기"><div class="no">01</div><div class="nm">F45 · 광고 랜딩페이지 + 캠페인 6개월 운영<small>Ad Campaign · 랜딩 + GA4 · GTM · 부울경 담당</small></div><div class="out">GA4·GTM<span>전환 추적</span></div><div class="yr">2024</div></div>
+    <div class="work" data-proj="0" tabindex="0" role="button" aria-label="client-hive 상세 보기"><div class="no">02</div><div class="nm">CLIENT-HIVE · 광고 에이전시 홈페이지 개발 · 관리자(CMS) 백엔드 총괄<small>Website · 에이전시 CMS · Flask · MySQL</small></div><div class="out">LIVE<span>Railway 운영</span></div><div class="yr">2025</div></div>
+    <div class="work" data-proj="1" tabindex="0" role="button" aria-label="autoblog 상세 보기"><div class="no">03</div><div class="nm">AUTOBLOG · 보도자료를 블로그 글로 자동 생성하는 AI 서비스 개발<small>AI SaaS · 보도자료 → 블로그 · Flask · Claude</small></div><div class="out">LIVE<span>Railway 운영</span></div><div class="yr">2025</div></div>
+    <div class="work" data-proj="2" tabindex="0" role="button" aria-label="facing 상세 보기"><div class="no">04</div><div class="nm">FACING · 크로스핏 운동 페이스 계산 앱 개발 (모바일 앱 + 서버)<small>Mobile · 앱 + 계산 API · Flutter · Flask</small></div><div class="out">iOS·안드로이드<span>둘 다 지원</span></div><div class="yr">2025</div></div>
+    <div class="work" data-proj="3" tabindex="0" role="button" aria-label="workcheck 상세 보기"><div class="no">05</div><div class="nm">WORKCHECK · 인력사무소 노무 관리 프로그램 개발 (사진 자동 입력)<small>Internal · OCR 노무 관리 · Flask · PWA</small></div><div class="out">OCR<span>자동 입력</span></div><div class="yr">2024</div></div>
+    <div class="work" data-proj="4" tabindex="0" role="button" aria-label="chunking 상세 보기"><div class="no">06</div><div class="nm">CHUNKING · 영어 학습 전자책(e-book) 제작 · 조판<small>E-Book · HTML → PDF 출판 · HTML · CSS</small></div><div class="out">e-book<span>HTML→PDF</span></div><div class="yr">2025</div></div>
+    <div class="work" data-proj="5" tabindex="0" role="button" aria-label="client-gangseo 상세 보기"><div class="no">07</div><div class="nm">CLIENT-GANGSEO · 부산 강서 시니어클럽 홈페이지 개발 · 관리자 백엔드 총괄<small>Client Site · 기관 홈페이지 · HTML · Firebase</small></div><div class="out">Active<span>운영 중</span></div><div class="yr">2024</div></div>
   </div>
 </div></section>
 
@@ -625,7 +661,7 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
-  document.querySelectorAll('.pcard[data-proj]').forEach(function (el) {
+  document.querySelectorAll('.pcard[data-proj], .work[data-proj]').forEach(function (el) {
     el.addEventListener('click', function () { open(+el.getAttribute('data-proj')); });
     el.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(+el.getAttribute('data-proj')); }
@@ -816,9 +852,10 @@
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
-  var sel = 'section .secnum, section .sectitle, section .secintro, .bio, .ptabs, .pcarousel, .stackwrap, .proc, .contact .meta, .contact h2, .contact .promise, .contact .mail, .contact .sub';
+  var sel = 'section .secnum, section .sectitle, section .secintro, .bio, .ptabs, .pcarousel, .worklabel, .work, .stackwrap, .proc, .contact .meta, .contact h2, .contact .promise, .contact .mail, .contact .sub';
   var els = document.querySelectorAll(sel);
   els.forEach(function (el) { el.classList.add('reveal'); });
+  document.querySelectorAll('.work').forEach(function (el, i) { el.style.transitionDelay = (i * 0.05) + 's'; });
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) e.target.classList.add('in');
@@ -928,7 +965,7 @@
     requestAnimationFrame(loop);
   })();
 
-  var HOVER = 'a, button, [role="button"], input, select, textarea, label, .pcard, .ptab, .parw, .pdot, .pstep, .scol li';
+  var HOVER = 'a, button, [role="button"], input, select, textarea, label, .pcard, .ptab, .parw, .pdot, .work, .pstep, .scol li';
   document.addEventListener('mouseover', function (e) {
     if (e.target.closest(HOVER)) {
       ring.style.width = '18px'; ring.style.height = '18px';
