@@ -38,6 +38,15 @@
   .logo b{color:var(--mint)}
   .navlinks{display:flex;gap:30px;font-family:var(--mono);font-size:13px;color:var(--sub);align-items:center}
   .navlinks a:hover{color:var(--mint)}
+  .navtoggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:9px;background:none;border:0;cursor:none}
+  .navtoggle span{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+  .navtoggle.on span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .navtoggle.on span:nth-child(2){opacity:0}
+  .navtoggle.on span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobnav{display:none;flex-direction:column;background:rgba(12,14,19,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .mobnav.open{display:flex}
+  .mobnav a{font-family:var(--mono);font-size:15px;color:var(--sub);padding:17px 24px;border-top:1px solid var(--line);transition:color .2s,background .2s}
+  .mobnav a:hover,.mobnav a:active{color:var(--mint);background:var(--bg2)}
 
   /* HERO */
   .hero{padding:152px 0 120px;position:relative;min-height:88vh;display:flex;align-items:center}
@@ -295,6 +304,7 @@
 
   @media(max-width:560px){
     .navlinks{display:none}
+    .navtoggle{display:flex}
     .modal-ov{padding:12px}
     .modal{padding:26px 20px;border-radius:16px;max-height:92vh}
     .modal-x{top:14px;right:14px}
@@ -371,6 +381,12 @@
   <div class="navlinks">
     <a href="#projects">projects</a><a href="#skills">skills</a><a href="#process">process</a><a href="#contact">contact</a>
   </div>
+  <button class="navtoggle" aria-label="메뉴" aria-expanded="false" aria-controls="mobnav">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<div class="mobnav" id="mobnav">
+  <a href="#projects">projects</a><a href="#skills">skills</a><a href="#process">process</a><a href="#contact">contact</a>
 </div></nav>
 
 <header class="hero"><div class="wrap">
@@ -1118,7 +1134,21 @@
     requestAnimationFrame(loop);
   })();
 
-  var HOVER = 'a, button, [role="button"], input, select, textarea, label, .pcard, .ptab, .parw, .pdot, .work, .g-thumb, .g-main, .g-arw, .pstep, .scol li';
+  (function () {
+    var tog = document.querySelector('.navtoggle');
+    var panel = document.getElementById('mobnav');
+    if (!tog || !panel) return;
+    function setOpen(on) {
+      tog.classList.toggle('on', on);
+      panel.classList.toggle('open', on);
+      tog.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    tog.addEventListener('click', function () { setOpen(!panel.classList.contains('open')); });
+    panel.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 560) setOpen(false); });
+  })();
+
+  var HOVER = 'a, button, [role="button"], input, select, textarea, label, .navtoggle, .pcard, .ptab, .parw, .pdot, .work, .g-thumb, .g-main, .g-arw, .pstep, .scol li';
   document.addEventListener('mouseover', function (e) {
     if (e.target.closest(HOVER)) {
       ring.style.width = '18px'; ring.style.height = '18px';
